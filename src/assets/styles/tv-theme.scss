@@ -4,7 +4,7 @@
     --color-primary: #88cc24;
     --home-bg: linear-gradient(#85c940, #46b2d8);
     --text-color: #3c6918;
-    --card-linear-bg: linear-gradient(to right, #e6efcc, #a5d460);
+    --card-linear-bg: ;
     --info-card-bg: #f3fae9;
   }
 
@@ -12,49 +12,42 @@
     --color-primary: #55c869;
     --home-bg: linear-gradient(#4fc676, #46b2d8);
     --text-color: #1f6d38;
-    --card-linear-bg: linear-gradient(to right, #d3ecd7, #83dc98);
     --info-card-bg: #e9f9ee;
   }
   &.tv-3 {
     --color-primary: #4ec5bf;
-    --home-bg: linear-gradient(#4ebac4, #9f73fa);
+    --home-bg: linear-gradient(#4fbbc5, #9d75fa);
     --text-color:#1f5e66;
-    --card-linear-bg: linear-gradient(to right, #c6efed, #79dbd9);
     --info-card-bg: #e8f8f7;
   }
   &.tv-4 {
     --color-primary: #6888ff;
     --home-bg: linear-gradient(#7285fd, #df65de);
     --text-color:#2735af;
-    --card-linear-bg: linear-gradient(to right, #dce1ff, #a2baf9);
     --info-card-bg: #eff1fe;
   }
   &.tv-5 {
     --color-primary: #ad6ffe;
     --home-bg: linear-gradient(#b26cf2, #ee6167);
     --text-color:#5527bb;
-    --card-linear-bg: linear-gradient(to right, #eae3f8, #d3a7ff);
     --info-card-bg: #f3effe;
   }
   &.tv-6 {
     --color-primary: #f45f58;
     --home-bg: linear-gradient(#f45f63,#ed5fcf);
     --text-color:#9a2420;
-    --card-linear-bg: linear-gradient(to right, #f8dfc6, #f9ae6c);
     --info-card-bg: #fdeeeb;
   }
   &.tv-7 {
     --color-primary: #9a2420;
     --home-bg: linear-gradient(#f88334,#f6c73c);
     --text-color:#872c07;
-    --card-linear-bg: linear-gradient(to right, #fad7d3, #f99b91);
     --info-card-bg: #fdf0e7;
   }
   &.tv-8 {
     --color-primary: #4f5c7c;
     --home-bg: linear-gradient(#2f323b,#402d6f);
     --text-color:#323a54;
-    --card-linear-bg: linear-gradient(to right, #cacbcf, #8d9099);
     --info-card-bg: #ecedf1;
   }
 
@@ -63,17 +56,6 @@
   .van-sticky--fixed {
     .nav {
       background: var(--color-primary);
-    }
-  }
-
-  .level-card {
-    color: var(--text-color);
-    background-image: var(--card-linear-bg);
-
-    .van-progress {
-      .van-progress__portion {
-        background: var(--text-color);
-      }
     }
   }
 
