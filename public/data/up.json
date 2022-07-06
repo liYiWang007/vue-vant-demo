@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "up": "李一汪",
+      "id": "233",
+      "up-face": "data/img/up-info-face.jpg",
+      "score": "1",
+      "credit": "34",
+      "email": "test@qq.com"
+    },
+    {
+      "up": "张三",
+      "id": "555",
+      "up-face": "data/img/up-info-face.jpg",
+      "score": "1",
+      "credit": "34",
+      "email": "test@qq.com"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+/* 通用樣式*/
+/*flex佈局*/
+.flex{
+    display: flex;
+}
+.flex-column{
+    display: flex;
+    flex-direction: column;
+}
+.flex-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.flex-1{
+    flex:1;
+}
+.shrink-0{
+    flex-shrink: 0;
+}
+
+.oh{
+    overflow: hidden;
+}
+
+// 尺寸
+.m-1{
+    margin: 16px;
+}
+.mb-1{
+    margin-bottom: 16px;
+}

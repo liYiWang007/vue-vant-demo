@@ -1,0 +1,76 @@
+import {
+    Area,
+    Button,
+    Badge,
+    Circle,
+    Dialog,
+    Notify,
+    Loading,
+    DropdownItem,
+    DropdownMenu,
+    Popup,
+    Form,
+    Field,
+    RadioGroup,
+    Radio,
+    Calendar,
+    Col,
+    Cell,
+    CellGroup,
+    Grid,
+    GridItem,
+    Icon,
+    Row,
+    Slider,
+    Stepper,
+    Swipe,
+    SwipeItem,
+    Tab,
+    Tabs,
+    Tag,
+    Sticky,
+    Picker,
+    Progress,
+    Uploader,
+    Toast
+} from 'vant'
+
+export const useVant = {
+    install(app) {
+        Toast.setDefaultOptions('loading', { message: '加载中...', forbidClick: true, duration: 0, loadingType: 'spinner' })
+        app.use(Area)
+        app.use(Button)
+        app.use(Badge)
+        app.use(Circle)
+        app.use(Dialog)
+        app.use(Notify)
+        app.use(Loading)
+        app.use(DropdownItem)
+        app.use(DropdownMenu)
+        app.use(Form)
+        app.use(Field)
+        app.use(RadioGroup)
+        app.use(Radio)
+        app.use(Calendar)
+        app.use(Col)
+        app.use(Grid)
+        app.use(Tab)
+        app.use(Tabs)
+        app.use(Tag)
+        app.use(GridItem)
+        app.use(Icon)
+        app.use(Popup)
+        app.use(Row)
+        app.use(Slider)
+        app.use(Stepper)
+        app.use(Swipe)
+        app.use(SwipeItem)
+        app.use(Sticky)
+        app.use(Picker)
+        app.use(Progress)
+        app.use(Cell)
+        app.use(CellGroup)
+        app.use(Uploader)
+        app.use(Toast)
+    }
+}
