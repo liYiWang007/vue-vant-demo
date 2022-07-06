@@ -1,28 +1,46 @@
 <template>
   <div class="level-banner">
-    <div class="level-card level_1">
+    <div :class="['level-card',lvClass]">
       <div class="bg-stripe">
         <div>
-          <h3 class="level-info cur-level">Lv1</h3>
-          <router-link class="score-credit" to="/myCredit">信用分：{{ credit }}分></router-link>
+          <h3 class="level-info cur-level">Lv{{level}}</h3>
+          <router-link
+            class="score-credit"
+            to="/myCredit"
+          >信用分：{{ credit }}分></router-link>
         </div>
-        <van-progress :percentage="score" v-if="curLv" track-color="rgba(0,0,0,.2)"/>
-        <div class="score" v-if="curLv">电磁力分：<b> {{ score }}/100</b></div>
-        <div v-else>电磁力分达{{borderLine}}可解锁</div>
+        <van-progress
+          :percentage="score"
+          v-if="curLv"
+          track-color="rgba(0,0,0,.2)"
+        />
+        <div
+          class="score"
+          v-if="curLv"
+        >电磁力分：
+          <b> {{ score }}/100</b>
       </div>
+      <div v-else>电磁力分达{{borderLine}}可解锁</div>
     </div>
-    <img class="level-role" :src="imgPath" alt="">
   </div>
+  <img
+    class="level-role"
+    :src="imgPath"
+    alt=""
+  >
+    </div>
 </template>
 
 <script>
 export default {
   name: 'LevelCard.vue',
   props: {
+    lvClass: String,
     imgPath: String,
     score: Number,
     credit: Number,
     borderLine: Number,
+    level:String,
     curLv: {
       type: Boolean,
       default: false
@@ -32,12 +50,12 @@ export default {
 </script>
 
 <style lang="scss">
-@import "src/assets/styles/tv-theme.scss";
+@import 'src/assets/styles/tv-theme.scss';
 
 .level-banner {
   .level-card {
     position: relative;
-    width: calc(100% - 32px);
+    width: 100%;
     font-size: 16px;
     text-align: left;
     border-radius: 14px;
@@ -45,7 +63,29 @@ export default {
     .bg-stripe {
       width: 100%;
       padding: 16px;
-      background-image: linear-gradient(110deg, transparent 80%, rgba(0, 0, 0, .1) 81%, transparent 82%, rgba(0, 0, 0, .1) 83%, transparent 84%, rgba(0, 0, 0, .1) 85%, transparent 86%, rgba(0, 0, 0, .1) 87%, transparent 88%, rgba(0, 0, 0, .1) 89%, transparent 90%, rgba(0, 0, 0, .1) 91%, transparent 92%, rgba(0, 0, 0, .1) 93%, transparent 94%, rgba(0, 0, 0, .1) 95%, transparent 96%, rgba(0, 0, 0, .1) 97%, transparent 98%, rgba(0, 0, 0, .1) 99%);
+      background-image: linear-gradient(
+        110deg,
+        transparent 80%,
+        rgba(0, 0, 0, 0.1) 81%,
+        transparent 82%,
+        rgba(0, 0, 0, 0.1) 83%,
+        transparent 84%,
+        rgba(0, 0, 0, 0.1) 85%,
+        transparent 86%,
+        rgba(0, 0, 0, 0.1) 87%,
+        transparent 88%,
+        rgba(0, 0, 0, 0.1) 89%,
+        transparent 90%,
+        rgba(0, 0, 0, 0.1) 91%,
+        transparent 92%,
+        rgba(0, 0, 0, 0.1) 93%,
+        transparent 94%,
+        rgba(0, 0, 0, 0.1) 95%,
+        transparent 96%,
+        rgba(0, 0, 0, 0.1) 97%,
+        transparent 98%,
+        rgba(0, 0, 0, 0.1) 99%
+      );
       border-radius: 14px;
       box-sizing: border-box;
     }
