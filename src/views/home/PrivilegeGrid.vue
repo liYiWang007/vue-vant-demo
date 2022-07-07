@@ -115,7 +115,8 @@ export default {
   .collapse-title {
     height: 20px;
     line-height: 20px;
-    padding: 16px;
+    margin: 16px 0;
+    padding: 0 16px;
     font-size: 16px;
     color: #ffffff;
 
