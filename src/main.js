@@ -10,6 +10,7 @@ import axios from 'axios' //引入axios
 // import VueAwesomeSwiper  from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css' 
 
+axios.defaults.baseURL='http://localhost:8080/data/'
 Vue.prototype.$axios = axios //把axios挂载到vue上
 
 Vue.config.productionTip = false

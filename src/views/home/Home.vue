@@ -21,15 +21,11 @@
     </div>
     <!--up主信息-->
     <div class="up-info">
-      <img
-        class="up-info-face"
-        :src="require('../../assets/images/home/up-info-face.jpg')"
-        alt="up主"
-      >
-      <span class="up-info-name">{{ up }}</span>
+      <img class="up-info-face" :src="getUserInfo.upFace" alt="up主" >
+      <span class="up-info-name">{{ getUserInfo.up }}</span>
     </div>
     <!-- vue-awesome-swiper轮播-->
-    <awesome-swiper :credit="credit" :score="score"></awesome-swiper>
+    <awesome-swiper :credit="getUserInfo.credit" :score="getUserInfo.score"></awesome-swiper>
     <div class="upgrade-time">更新时间：2022-07-05</div>
     <!--权益-->
     <privilege-grid :active-tv="activeTv"/>
@@ -58,11 +54,8 @@ export default {
       curLevel: '1',
       activeTv: '1',
       advanceScore: 34,
-      score: 23,
-      credit: 66,
-      up: '李狗剩',
       showScoreTips: true,
-      userInfo: [],
+      getUserInfo: {},
     }
   },
   mounted() {
@@ -75,11 +68,15 @@ export default {
     },
     getUserData() {
       this.$axios
-        .get('http://localhost:8080/data/up.json')
+        .get('users.json')
         .then(res => {
-          // this.res=res
-          console.log(res.body)
-          console.log(this.up)
+          const data =res.data
+          let user=null
+          for(let key in data){
+            if(data[key].UID==='233') {user=data[key]}
+          }
+          this.getUserInfo=user
+
         })
         .catch(err => {
           console.log('error', err.message)

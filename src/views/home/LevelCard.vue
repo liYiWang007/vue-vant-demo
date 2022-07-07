@@ -52,7 +52,7 @@ export default {
 @import 'src/assets/styles/tv-theme.scss';
 .level-card {
   position: relative;
-  width: 100%;
+  width: 100vw;
   font-size: 16px;
   text-align: left;
   border-radius: 14px;

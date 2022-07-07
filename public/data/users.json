@@ -1,0 +1,20 @@
+[
+  {
+    "up": "李狗剩",
+    "UID": "233",
+    "upFace": "data/img/up-info-face.jpg",
+    "score": 1,
+    "credit": 34,
+    "level": 1,
+    "email": "test@qq.com"
+  },
+  {
+    "up": "张三",
+    "UID": "555",
+    "upFace": "data/img/noface.jpg",
+    "score": 1,
+    "credit": 34,
+    "level": 8,
+    "email": "test@qq.com"
+  }
+]
