@@ -1,7 +1,7 @@
 [
   {
-    "up": "李狗剩",
     "UID": "233",
+    "up": "李狗剩",
     "upFace": "data/img/up-info-face.jpg",
     "score": 1,
     "credit": 34,
@@ -9,12 +9,64 @@
     "email": "test@qq.com"
   },
   {
-    "up": "张三",
+    "UID": "231",
+    "level": "3",
+    "facePath": "",
+    "name": "蒙古上单",
+    "toFollow": true,
+    "beGoodAt": "演讲",
+    "email": "test@cilicili.com",
+    "tags": [
+      {
+        "tag": "重要讲话"
+      },
+      {
+        "tag": "1亿+互动"
+      }
+    ]
+  },
+  {
+    "UID": "234",
+    "level": "3",
+    "facePath": "",
+    "name": "陈睿",
+    "toFollow": false,
+    "email": "test@cilicili.com",
+    "tags": [
+      {
+        "tag": "b站建国"
+      },
+      {
+        "tag": "10+周互动"
+      }
+    ]
+  },
+  {
+    "UID": "235",
+    "level": "8",
+    "facePath": "",
+    "name": "小约翰可汗",
+    "toFollow": false,
+    "beGoodAt": "历史人文",
+    "email": "test@cilicili.com",
+    "tags": [
+      {
+        "tag": "通辽宇宙"
+      },
+      {
+        "tag": "鸽皇之皇"
+      }
+    ]
+  },
+  {
     "UID": "555",
+    "up": "张三",
     "upFace": "data/img/noface.jpg",
     "score": 1,
     "credit": 34,
     "level": 8,
-    "email": "test@qq.com"
+    "toFollow": false,
+    "email": "test@qq.com",
+    "tags": []
   }
 ]

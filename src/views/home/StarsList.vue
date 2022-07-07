@@ -6,11 +6,13 @@
         <div class="star-info flex-1">
           <div class="star-info__name">{{ item.name }}</div>
           <p class="star-info_label">电磁力：Lv{{ item.level }}·擅长：{{ item.beGoodAt ? item.beGoodAt : '日常' }}</p>
+          <template v-if="item.tags">
           <div class="star-tag">
             <van-tag color="#fff0e3" text-color="#ff7f24" v-for="(subItem,subIndex) in item.tags" :key="subIndex">
-              {{ subItem.name }}
+              {{ subItem.tag }}
             </van-tag>
           </div>
+          </template>
         </div>
 
         <van-button :class="['follow-btn',{'is-followed':item.toFollow}]" :type="item.toFollow?'':'primary'"
@@ -28,34 +30,28 @@ export default {
   name: 'StarsList',
   data() {
     return {
-      starData: [
-        {
-          UID: '231',
-          level: '3',
-          facePath: '',
-          name: '蒙古上单',
-          toFollow: true,
-          beGoodAt: '演讲',
-          tags: [{name: '重要讲话'}, {name: '1亿+互动'},]
-        },
-        {
-          UID: '234',
-          level: '3',
-          facePath: '',
-          name: '陈睿',
-          toFollow: false,
-          tags: [{name: 'b站建国'}, {name: '10+周互动'},]
-        },
-        {
-          UID: '235',
-          level: '8',
-          facePath: '',
-          name: '小约翰可汗',
-          toFollow: false,
-          beGoodAt: '历史人文',
-          tags: [{name: '通辽宇宙'}, {name: '鸽皇之皇'},]
-        }
-      ]
+      starData: []
+    }
+  },
+  mounted(){
+    this.getStarsList()
+  },
+  methods:{
+    getStarsList(){
+    this.$axios.get('users.json')
+      .then(res=>{
+          const data=res.data
+          // console.log(data);
+          const users=[]
+          for(let key in data){
+            if(data[key].UID!=='233'){
+              const user =data[key]
+              users.push(user)
+            }
+          }
+          console.log(users);
+          this.starData=users
+      })
     }
   }
 }
