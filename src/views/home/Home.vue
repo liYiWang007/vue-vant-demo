@@ -1,5 +1,5 @@
 <template>
-  <div :class="['home', `tv-${activeTv}`]">
+  <div :class="['home', `tv-${lv}`]">
     <van-sticky>
       <Nav title="电磁力">
         <template #nav-right>
@@ -25,7 +25,7 @@
       <span class="up-info-name">{{ getUserInfo.up }}</span>
     </div>
     <!-- vue-awesome-swiper轮播-->
-    <awesome-swiper :credit="getUserInfo.credit" :score="getUserInfo.score"></awesome-swiper>
+    <awesome-swiper ref="awesomeSwiper" :credit="getUserInfo.credit" :score="getUserInfo.score" :level="getUserInfo.level"/>
     <div class="upgrade-time">更新时间：2022-07-05</div>
     <!--权益-->
     <privilege-grid :active-tv="activeTv"/>
@@ -50,22 +50,24 @@ export default {
   },
   data() {
     return {
+      lv:1,
       showplDialog: true,
-      curLevel: '1',
       activeTv: '1',
       advanceScore: 34,
       showScoreTips: true,
       getUserInfo: {},
     }
   },
+  created(){
+    this.$nextTick(()=>{
+      this.getUserData()
+      this.initUserData()
+    })
+  },
   mounted() {
-    this.getUserData()
+
   },
   methods: {
-    onChange(index) {
-      this.activeTv = String(index + 1)
-      console.log('当前 Swipe 索引：' + this.activeTv)
-    },
     getUserData() {
       this.$axios
         .get('users.json')
@@ -76,11 +78,16 @@ export default {
             if(data[key].UID==='233') {user=data[key]}
           }
           this.getUserInfo=user
-
+          this.lv=this.getUserInfo.level
         })
         .catch(err => {
           console.log('error', err.message)
         })
+    },
+    initUserData(){
+      let curLevel=this.getUserInfo.level
+      console.log(this.getUserInfo.level);
+
     }
   }
 }
@@ -148,7 +155,7 @@ export default {
     position: relative;
     padding-right: 40px;
     height: 0;
-    top: -70px;
+    transform: translateY(-120px);
     opacity: 0.7;
     font-size: 12px;
     color: #ffffff;

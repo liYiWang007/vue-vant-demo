@@ -41,7 +41,6 @@ export default {
     this.$axios.get('users.json')
       .then(res=>{
           const data=res.data
-          // console.log(data);
           const users=[]
           for(let key in data){
             if(data[key].UID!=='233'){
@@ -49,7 +48,6 @@ export default {
               users.push(user)
             }
           }
-          console.log(users);
           this.starData=users
       })
     }

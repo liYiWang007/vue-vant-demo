@@ -9,17 +9,10 @@
         >信用分：{{ credit }}分>
         </router-link>
       </div>
-      <van-progress
-        :percentage="score"
-        v-if="curLv"
-        track-color="rgba(0,0,0,.2)"
-      />
-      <div
-        class="score"
-        v-if="curLv"
-      >电磁力分：
-        <b> {{ score }}/100</b>
-      </div>
+      <template v-if="curLv">
+        <van-progress :percentage="score" track-color="rgba(0,0,0,.2)"/>
+        <div class="score">电磁力分：<b> {{ score }}/100</b></div>
+      </template>
       <div v-else style="font-size: 14px;">电磁力分达{{ borderLine }}可解锁</div>
     </div>
   </div>
@@ -50,9 +43,10 @@ export default {
 
 <style lang="scss">
 @import 'src/assets/styles/tv-theme.scss';
+
 .level-card {
   position: relative;
-  width: 100vw;
+  width: 100%;
   font-size: 16px;
   text-align: left;
   border-radius: 14px;
@@ -60,36 +54,15 @@ export default {
   .bg-stripe {
     width: 100%;
     padding: 16px;
-    background-image: linear-gradient(
-        110deg,
-        transparent 80%,
-        rgba(0, 0, 0, 0.1) 81%,
-        transparent 82%,
-        rgba(0, 0, 0, 0.1) 83%,
-        transparent 84%,
-        rgba(0, 0, 0, 0.1) 85%,
-        transparent 86%,
-        rgba(0, 0, 0, 0.1) 87%,
-        transparent 88%,
-        rgba(0, 0, 0, 0.1) 89%,
-        transparent 90%,
-        rgba(0, 0, 0, 0.1) 91%,
-        transparent 92%,
-        rgba(0, 0, 0, 0.1) 93%,
-        transparent 94%,
-        rgba(0, 0, 0, 0.1) 95%,
-        transparent 96%,
-        rgba(0, 0, 0, 0.1) 97%,
-        transparent 98%,
-        rgba(0, 0, 0, 0.1) 99%
-    );
+    background: url('../../assets/images/home/strip-bg.png') no-repeat 0 0;
+    background-size: 100% auto;
     border-radius: 14px;
     box-sizing: border-box;
   }
 
   .level-info {
     margin: 0 0 10px;
-    font-size: 36px;
+    font-size: 27px;
     display: inline-block;
     font-family: DIN-BlackItalic;
   }
@@ -104,9 +77,14 @@ export default {
   }
 
   .score-credit {
-    font-size: 14px;
-    margin-left: 10px;
+    font-size: 12px;
+    margin-left: 4px;
     color: #3c6918;
   }
+  .van-progress{
+    width: 60%;
+    .van-progress__pivot{
+    display: none;
+  }}
 }
 </style>

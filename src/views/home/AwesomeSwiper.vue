@@ -1,52 +1,50 @@
 <template>
   <div class="awesome-swiper">
-    <!--    主要的轮播-->
+    <!-- 轮播主体-->
     <swiper
       class="swiper"
       ref="mainSwiper"
       :options="swiperOptions"
     >
       <swiper-slide
-        class="flex-center"
-        v-for="index in 7"
-        :key="index"
+        :initial-slide="8"
+        v-for="index in 8"
+        :key="`slide-${index}`"
       >
+        <van-tag class="unlock-tag" round v-if="level<index">
+          <van-icon name="lock"/>
+          待解锁
+        </van-tag>
+        <!--角色图-->
+        <img
+          :class="['role-img',`role-img-${index}`]"
+          :src="require(`../../assets/images/home/TV-${index}.png`)"
+        >
         <level-card
-          :class="`lv-${index+1}`"
-          :level="`${index+1}`"
+          :class="`lv-${index}`"
+          :level="`${index}`"
           :credit="credit"
           :score="score"
+          :cur-lv="level==index"
           :border-line="(index*100)+1"
         />
-        <img
-          class="level-role"
-          :src="require(`../../assets/images/home/TV-${index+1}.png`)"
-        >
-          </swiper-slide>
-          <!--      <div class="swiper-pagination flex" slot="pagination"></div>-->
-          </swiper>
-          <!--导航轮播-->
-          <swiper
-            class="swipe-page"
-            ref="swiperThumbs"
-            :options="pageOptions"
-          >
-            <swiper-slide
-              v-for="index in 7"
-              :key="index"
-            >
-              <img
-                :src="require(`../../assets/images/icons/icon-tv${index+1}.png`)"
-                width="40px"
-                height="40px"
-              >
-                </swiper-slide>
-                </swiper>
+      </swiper-slide>
+
+    </swiper>
+    <!--导航轮播-->
+    <swiper
+      class="swipe-page flex"
+      ref="swiperThumbs"
+      :options="pageOptions"
+    >
+      <swiper-slide class="flex-center" v-for="index in 8" :key="`icon-${index}`"><img
+        :src="require(`../../assets/images/icons/icon-tv${index}.png`)" width="40px" height="40px"></swiper-slide>
+    </swiper>
   </div>
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import {Swiper, SwiperSlide} from 'vue-awesome-swiper'
 import LevelCard from './LevelCard.vue'
 
 export default {
@@ -64,23 +62,37 @@ export default {
     score: {
       type: Number,
       default: 0
-    }
+    },
+    level: Number
   },
   data() {
+    let self = this
     return {
-      swiperOptions: {
-        //轮播主体
-        slidesPerView: 2, //设置为偶数会出现遮盖一半的效果
-        spaceBetween: 0,
+      test: 1,
+      activeTv: 1,
+      swiperOptions: {//轮播主体
+        observer: true,
+        observeParents: true,
+        slidesPerView: 'auto', //自动撑开
+        loopedSlides: 2,
         followFinger: false, //只有当放开slide才会切换
         resistanceRatio: 0, //抵抗率,0时无法拖离边缘。
-        centeredSlides: true //active的slide居中
+        centeredSlides: true, //active的slide居中
+        activeIndex:1,
+        initialSlide:1,
+        on: {
+          slideChange: function () {
+            self.activeTv = this.activeIndex;
+            console.log('self.activeTv', self.activeTv);
+          },
+        }
       },
       pageOptions: {
         //模拟轮播导航栏
-        width: 40,
+        observer: true,
+        observeParents: true,
         slidesPerView: 3, //显示三个完整的slide 导航
-        spaceBetween: 100,
+        spaceBetween: 0,
         resistanceRatio: 0, //禁止拖离边缘。
         centeredSlides: true, //active 的slide居中
         allowTouchMove: false, //禁止触摸滑动
@@ -88,79 +100,90 @@ export default {
       }
     }
   },
+  created() {
+    this.activeTv = this.level
+  },
   mounted() {
     this.$nextTick(() => {
+      this.init()
+      this.controlSwiper()
+    })
+  },methods:{
+    controlSwiper(){
       //利用controller双向控制
       const swiperWarp = this.$refs.mainSwiper.$swiper
       const swiperThumbs = this.$refs.swiperThumbs.$swiper
       swiperWarp.controller.control = swiperThumbs
       swiperThumbs.controller.control = swiperWarp
-    })
+    },
+    init(){
+      // this.swiperOptions.initialSlide=7
+      // this.$refs.mainSwiper.initialSlide=this.level
+      // console.log('initialSlide',this.swiperOptions);
+    }
   }
 }
 </script>
 <style lang="scss">
 .awesome-swiper {
   .swiper {
-    height: 300px;
+    height: 270px;
 
     .swiper-slide {
-      padding: 0 16px;
-      height: 100%;
+      box-sizing: border-box;
+      width: 80%;
+      height: auto;
+      padding-right: 20px;
+      overflow-x: hidden;
       text-align: center;
       font-size: 18px;
       transition: 300ms;
-      box-sizing: border-box;
 
-      //白色装饰线
-      &::before {
-        z-index: 0;
+      .unlock-tag {
+        z-index: 11;
         position: absolute;
-        left: 0;
-        bottom: 0;
-        width: calc(40% - 24px);
-        height: 2px;
-        background: rgba(255, 255, 255, 0.6);
-        content: '';
+        top: 40%;
+        right: 36px;
+        padding: 0 16px;
+        height: 30px;
+        align-items: center;
+        justify-content: center;
+        color: #1e1c1f;
+        background: rgba(255, 255, 255, .7);
       }
 
-      &::after {
-        z-index: 1;
+      .role-img {
+        z-index: 9;
         position: absolute;
         right: 0;
-        bottom: 0;
-        width: calc(40% - 24px);
-        height: 2px;
-        background: rgba(255, 255, 255, 0.6);
-        content: '';
-      }
-
-      &:first-child::before {
-        display: none;
-      }
-
-      &:last-child::after {
-        display: none;
-      }
-
-      .level-role {
-        z-index: 10;
-        position: absolute;
-        top: -7px;
-        right: -40px;
-        width: 66%;
+        width: 36vw;
         height: auto;
         pointer-events: none;
         -webkit-user-drag: none;
         overflow: hidden;
+
+        &.role-img-1 {
+          width: 40vw;
+        }
+
+        &.role-img-5, &.role-img-7,&.role-img-6, &.role-img-8 {
+          width: 43vw;
+        }
+        &.role-img-8{
+          bottom: 20px;
+        }
+
       }
+
     }
 
     .level-card {
       z-index: 5;
-      width: 80vw;
-      height: 150px;
+      height: 100px;
+      margin-top: 60px;
       overflow: hidden;
+      transition: height .3s;
+
       &.lv-1 {
         color: #88cc24;
         background-image: linear-gradient(to right, #e6efcc, #a5d460);
@@ -252,20 +275,34 @@ export default {
 
     .swiper-slide-active,
     .swiper-slide-duplicate-active {
-      .level-card {
-        height: auto;
+      .level-card, .bg-stripe {
+        height: 120px;
       }
     }
   }
 
   .swipe-page {
     height: 40px;
-    margin-top: -20px;
+    transform: translateY(-30px);
 
     .swiper-slide {
+      width: 40px;
       height: 40px;
       transition: 300ms;
       opacity: 0.6;
+      text-align: left;
+
+      &::after {
+        display: inline-block;
+        flex: 1;
+        height: 1px;
+        background: rgba(255, 255, 255, .3);
+        content: '';
+      }
+
+      &:last-child::after {
+        background: none;
+      }
     }
 
     .swiper-slide-active,

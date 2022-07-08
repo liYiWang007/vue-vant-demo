@@ -3,14 +3,14 @@
     "UID": "233",
     "up": "李狗剩",
     "upFace": "data/img/up-info-face.jpg",
-    "score": 1,
+    "score": 60,
     "credit": 34,
-    "level": 1,
+    "level": 8,
     "email": "test@qq.com"
   },
   {
     "UID": "231",
-    "level": "3",
+    "level": 3,
     "facePath": "",
     "name": "蒙古上单",
     "toFollow": true,
@@ -27,7 +27,7 @@
   },
   {
     "UID": "234",
-    "level": "3",
+    "level": 3,
     "facePath": "",
     "name": "陈睿",
     "toFollow": false,
@@ -43,7 +43,7 @@
   },
   {
     "UID": "235",
-    "level": "8",
+    "level": 8,
     "facePath": "",
     "name": "小约翰可汗",
     "toFollow": false,
