@@ -10,7 +10,7 @@
           <svg-icon :icon="item.icon"/>
           <div class="title">{{ item.title }}</div>
         </div>
-        <van-dialog v-show="plType===index?true:false" class="pl-dialog" confirm-button-text="知道了" round-button>
+        <van-dialog v-show="plType===index" class="pl-dialog" confirm-button-text="知道了" round-button>
           <svg-icon class="pl-dialog-icon" :icon="item.icon"/>
           <div class="pl-dialog-title">{{ item.title }}</div>
           <div class="pl-section-title">获得条件</div>
@@ -37,66 +37,66 @@ export default {
   },
   props:{
     activeTv:{
-      type:String,
-      default:'1'
+      type:Number,
+      default: 1
     }
   },
   data(){
     return{
-      plType: '1',
+      plType: 1,
       showAllGrid: false,
       plData: [
         {
-          tvLevel: '0',
+          tvLevel: 0,
           title: '关闭互动',
           icon: 'icon-interactiveClose',
           plCondition: '电磁力分>0,信用分≥80'
         },
         {
-          tvLevel: '0',
+          tvLevel: 0,
           title: '评论精选',
           icon: 'icon-goodComment',
           plCondition: '电磁力分>0,信用分≥80'
         },
         {
-          tvLevel: '3',
+          tvLevel: 3,
           title: '超大文件',
           icon: 'icon-largeFile',
           lvCredit: '',
           plCondition: '电磁力等级达到Lv3,信用分≥60'
         },
         {
-          tvLevel: '3',
+          tvLevel: 3,
           title: '创作激励',
           icon: 'icon-incentive',
           plCondition: '电磁力等级达到Lv3,信用分≥80'
         },
         {
-          tvLevel: '3',
+          tvLevel: 3,
           title: '合集',
           icon: 'icon-multipleArc',
           plCondition: '电磁力等级达到Lv3,信用分≥60'
         },
         {
-          tvLevel: '3',
+          tvLevel: 3,
           title: '版权保护',
           icon: 'icon-copyrightProtection',
           plCondition: '电磁力等级达到Lv3的个人up主。'
         },
         {
-          tvLevel: '4',
+          tvLevel: 4,
           title: '稿件预约',
           icon: 'icon-arcReserve',
           plCondition: '电磁力等级达到Lv4,信用分≥60'
         },
         {
-          tvLevel: '5',
+          tvLevel: 5,
           title: '联合投稿',
           icon: 'icon-avStaff',
           plCondition: '电磁力等级达到Lv5,信用分≥60'
         },
         {
-          tvLevel: '7',
+          tvLevel: 7,
           title: '互动抽奖',
           icon: 'icon-lottery',
           plCondition: '电磁力等级达到Lv7,信用分≥60'

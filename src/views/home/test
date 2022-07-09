@@ -1,0 +1,95 @@
+<template>
+  <div :class="['home', `tv-${getUserInfo.level}`]">
+    <van-sticky>
+      <Nav title="电磁力">
+        <template #nav-right>
+          <VanIcon name="question-o" />
+          <VanIcon name="share-o" />
+        </template>
+      </Nav>
+    </van-sticky>
+    <div
+      class="score-popover"
+      v-show="showScoreTips"
+    >
+      <van-icon name="volume-o" /> 電磁力較上周提高了{{ advanceScore }}分，冲冲冲！
+      <van-icon
+        name="cross"
+        @click="showScoreTips = !showScoreTips"
+      />
+  </div>
+  <!--up主信息-->
+  <div class="up-info">
+    <img
+      class="up-info-face"
+      :src="getUserInfo.upFace"
+      alt="up主"
+    >
+      <span class="up-info-name">{{ getUserInfo.up }}</span>
+  </div>
+  <!-- vue-awesome-swiper轮播-->
+  <awesome-swiper
+    ref="awesomeSwiper"
+    :credit="getUserInfo.credit"
+    :score="getUserInfo.score"
+    :level="getUserInfo.level"
+    v-if="flag"
+  />
+  <div class="upgrade-time">更新时间：2022-07-05</div>
+  <!--权益-->
+  <privilege-grid :active-tv="activeTv" />
+  <home-guidence/>
+  </div>
+</template>
+
+<script>
+// @ is an alias to /src
+import Nav from '@/components/Nav.vue'
+import PrivilegeGrid from './PrivilegeGrid.vue'
+import HomeGuidence from '@/views/home/HomeGuidence'
+import AwesomeSwiper from './AwesomeSwiper.vue'
+import { mapState } from 'vuex'
+
+export default {
+  name: 'Home',
+  components: {
+    AwesomeSwiper,
+    HomeGuidence,
+    PrivilegeGrid,
+    Nav
+  },
+  data() {
+    return {
+      flag:false,
+      lv: 1,
+      showplDialog: true,
+      activeTv: '1',
+      advanceScore: 34,
+      showScoreTips: true,
+      getUserInfo: {},
+    }
+  },
+  created() {
+    this.$nextTick(() => {
+      this.getUserData()
+    })
+  },
+  mounted() {},
+  computed: {
+    ...mapState(['upLv'])
+  },
+  methods: {
+    getUserData() {
+      this.$axios
+        .get('users.json')
+        .then(res => {
+          const data = res.data
+          this.flag=true
+        })
+        .catch(err => {
+          console.log('error', err.message)
+        })
+    }
+  }
+}
+</script>

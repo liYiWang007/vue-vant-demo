@@ -1,0 +1,188 @@
+.awesome-swiper {
+    .swiper {
+      height: 270px;
+  
+      .swiper-slide {
+        box-sizing: border-box;
+        width: 80%;
+        height: auto;
+        padding-right: 20px;
+        overflow-x: hidden;
+        text-align: center;
+        font-size: 18px;
+        transition: 300ms;
+  
+        .unlock-tag {
+          z-index: 11;
+          position: absolute;
+          top: 40%;
+          right: 36px;
+          padding: 0 16px;
+          height: 30px;
+          align-items: center;
+          justify-content: center;
+          color: #1e1c1f;
+          background: rgba(255, 255, 255, 0.7);
+        }
+  
+        .role-img {
+          z-index: 9;
+          position: absolute;
+          right: 0;
+          width: 36vw;
+          height: auto;
+          pointer-events: none;
+          -webkit-user-drag: none;
+          overflow: hidden;
+  
+          &.role-img-1 {
+            width: 40vw;
+          }
+  
+          &.role-img-5,
+          &.role-img-7,
+          &.role-img-6,
+          &.role-img-8 {
+            width: 43vw;
+          }
+          &.role-img-8 {
+            bottom: 20px;
+          }
+        }
+      }
+  
+      .level-card {
+        z-index: 5;
+        height: 100px;
+        margin-top: 60px;
+        overflow: hidden;
+        transition: height 0.3s;
+  
+        &.lv-1 {
+          color: #88cc24;
+          background-image: linear-gradient(to right, #e6efcc, #a5d460);
+  
+          .van-progress {
+            .van-progress__portion {
+              background: #88cc24;
+            }
+          }
+        }
+  
+        &.lv-2 {
+          color: #55c869;
+          background-image: linear-gradient(to right, #d3ecd7, #83dc98);
+  
+          .van-progress {
+            .van-progress__portion {
+              background: #55c869;
+            }
+          }
+        }
+  
+        &.lv-3 {
+          color: #4ec5bf;
+          background-image: linear-gradient(to right, #c6efed, #79dbd9);
+  
+          .van-progress {
+            .van-progress__portion {
+              background: #4ec5bf;
+            }
+          }
+        }
+  
+        &.lv-4 {
+          color: #6888ff;
+          background-image: linear-gradient(to right, #dce1ff, #a2baf9);
+  
+          .van-progress {
+            .van-progress__portion {
+              background: #6888ff;
+            }
+          }
+        }
+  
+        &.lv-5 {
+          color: #ad6ffe;
+          background-image: linear-gradient(to right, #eae3f8, #d3a7ff);
+  
+          .van-progress {
+            .van-progress__portion {
+              background: #ad6ffe;
+            }
+          }
+        }
+  
+        &.lv-6 {
+          color: #f45f58;
+          background-image: linear-gradient(to right, #f8dfc6, #f9ae6c);
+  
+          .van-progress {
+            .van-progress__portion {
+              background: #f45f58;
+            }
+          }
+        }
+  
+        &.lv-7 {
+          color: #9a2420;
+          background-image: linear-gradient(to right, #fad7d3, #f99b91);
+  
+          .van-progress {
+            .van-progress__portion {
+              background: #9a2420;
+            }
+          }
+        }
+  
+        &.lv-8 {
+          color: #4f5c7c;
+          background-image: linear-gradient(to right, #cacbcf, #8d9099);
+  
+          .van-progress {
+            .van-progress__portion {
+              background: #4f5c7c;
+            }
+          }
+        }
+      }
+  
+      .swiper-slide-active,
+      .swiper-slide-duplicate-active {
+        .level-card,
+        .bg-stripe {
+          height: 120px;
+        }
+      }
+    }
+  
+    .swipe-page {
+      height: 40px;
+      transform: translateY(-30px);
+  
+      .swiper-slide {
+        width: 40px;
+        height: 40px;
+        transition: 300ms;
+        opacity: 0.6;
+        text-align: left;
+  
+        &::after {
+          display: inline-block;
+          flex: 1;
+          height: 1px;
+          background: rgba(255, 255, 255, 0.3);
+          content: '';
+        }
+  
+        &:last-child::after {
+          background: none;
+        }
+      }
+  
+      .swiper-slide-active,
+      .swiper-slide-duplicate-active {
+        opacity: 1;
+      }
+    }
+  }

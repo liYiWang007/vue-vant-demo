@@ -6,6 +6,7 @@ import router from './router'
 import store from './store'
 import 'lib-flexible/flexible.js' //移动端尺寸兼容
 import axios from 'axios' //引入axios
+
 // // 引入轮播插件和样式表
 // import VueAwesomeSwiper  from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css' 

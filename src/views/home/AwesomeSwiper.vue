@@ -11,41 +11,53 @@
         v-for="index in 8"
         :key="`slide-${index}`"
       >
-        <van-tag class="unlock-tag" round v-if="level<index">
-          <van-icon name="lock"/>
-          待解锁
-        </van-tag>
-        <!--角色图-->
-        <img
-          :class="['role-img',`role-img-${index}`]"
-          :src="require(`../../assets/images/home/TV-${index}.png`)"
+        <van-tag
+          class="unlock-tag"
+          round
+          v-if="level<index"
         >
-        <level-card
-          :class="`lv-${index}`"
-          :level="`${index}`"
-          :credit="credit"
-          :score="score"
-          :cur-lv="level==index"
-          :border-line="(index*100)+1"
-        />
-      </swiper-slide>
+          <van-icon name="lock" /> 待解锁
+          </van-tag>
+          <!--角色图-->
+          <img
+            :class="['role-img',`role-img-${index}`]"
+            :src="require(`../../assets/images/home/TV-${index}.png`)"
+          >
+            <level-card
+              :class="`lv-${index}`"
+              :level="`${index}`"
+              :credit="credit"
+              :score="score"
+              :cur-lv="level==index"
+              :border-line="(index*100)+1"
+            />
+            </swiper-slide>
 
-    </swiper>
-    <!--导航轮播-->
-    <swiper
-      class="swipe-page flex"
-      ref="swiperThumbs"
-      :options="pageOptions"
-    >
-      <swiper-slide class="flex-center" v-for="index in 8" :key="`icon-${index}`"><img
-        :src="require(`../../assets/images/icons/icon-tv${index}.png`)" width="40px" height="40px"></swiper-slide>
-    </swiper>
+            </swiper>
+            <!--导航轮播-->
+            <swiper
+              class="swipe-page flex"
+              ref="swiperThumbs"
+              :options="pageOptions"
+            >
+              <swiper-slide
+                class="flex-center"
+                v-for="index in 8"
+                :key="`icon-${index}`"
+              >
+                <img
+                  :src="require(`../../assets/images/icons/icon-tv${index}.png`)"
+                  width="40px"
+                  height="40px"
+                ></swiper-slide>
+                  </swiper>
   </div>
 </template>
 
 <script>
-import {Swiper, SwiperSlide} from 'vue-awesome-swiper'
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import LevelCard from './LevelCard.vue'
+// import { mapState } from 'vuex'
 
 export default {
   name: 'AwesomeSwiper',
@@ -63,14 +75,15 @@ export default {
       type: Number,
       default: 0
     },
-    level: Number
+    level: Number //up本人level
   },
   data() {
     let self = this
     return {
-      test: 1,
       activeTv: 1,
-      swiperOptions: {//轮播主体
+      swiperOptions: {
+        //轮播主体
+        initialSlide: 6,
         observer: true,
         observeParents: true,
         slidesPerView: 'auto', //自动撑开
@@ -78,17 +91,19 @@ export default {
         followFinger: false, //只有当放开slide才会切换
         resistanceRatio: 0, //抵抗率,0时无法拖离边缘。
         centeredSlides: true, //active的slide居中
-        activeIndex:1,
-        initialSlide:1,
         on: {
-          slideChange: function () {
-            self.activeTv = this.activeIndex;
-            console.log('self.activeTv', self.activeTv);
-          },
+          slideChange: function() {
+            self.activeTv = this.realIndex
+            self.$parent.activeTv = this.realIndex+1
+            console.log('self.activeTv', self.activeTv)
+            console.log( 'homeactiveTv',self.$parent.activeTv);
+
+          }
         }
       },
       pageOptions: {
         //模拟轮播导航栏
+        initialSlide: 6,
         observer: true,
         observeParents: true,
         slidesPerView: 3, //显示三个完整的slide 导航
@@ -101,25 +116,26 @@ export default {
     }
   },
   created() {
-    this.activeTv = this.level
+      this.init()
   },
   mounted() {
     this.$nextTick(() => {
-      this.init()
       this.controlSwiper()
     })
-  },methods:{
-    controlSwiper(){
+  },
+  methods: {
+    controlSwiper() {
       //利用controller双向控制
       const swiperWarp = this.$refs.mainSwiper.$swiper
       const swiperThumbs = this.$refs.swiperThumbs.$swiper
       swiperWarp.controller.control = swiperThumbs
       swiperThumbs.controller.control = swiperWarp
     },
-    init(){
-      // this.swiperOptions.initialSlide=7
-      // this.$refs.mainSwiper.initialSlide=this.level
-      // console.log('initialSlide',this.swiperOptions);
+    init() {
+      // 获取父级通过axios拿到的用户数据
+      let mama = this.$parent.getUserInfo.level-1
+      this.swiperOptions.initialSlide=mama
+      this.pageOptions.initialSlide=mama
     }
   }
 }
@@ -149,7 +165,7 @@ export default {
         align-items: center;
         justify-content: center;
         color: #1e1c1f;
-        background: rgba(255, 255, 255, .7);
+        background: rgba(255, 255, 255, 0.7);
       }
 
       .role-img {
@@ -166,15 +182,16 @@ export default {
           width: 40vw;
         }
 
-        &.role-img-5, &.role-img-7,&.role-img-6, &.role-img-8 {
+        &.role-img-5,
+        &.role-img-7,
+        &.role-img-6,
+        &.role-img-8 {
           width: 43vw;
         }
-        &.role-img-8{
+        &.role-img-8 {
           bottom: 20px;
         }
-
       }
-
     }
 
     .level-card {
@@ -182,7 +199,7 @@ export default {
       height: 100px;
       margin-top: 60px;
       overflow: hidden;
-      transition: height .3s;
+      transition: height 0.3s;
 
       &.lv-1 {
         color: #88cc24;
@@ -275,7 +292,8 @@ export default {
 
     .swiper-slide-active,
     .swiper-slide-duplicate-active {
-      .level-card, .bg-stripe {
+      .level-card,
+      .bg-stripe {
         height: 120px;
       }
     }
@@ -296,7 +314,7 @@ export default {
         display: inline-block;
         flex: 1;
         height: 1px;
-        background: rgba(255, 255, 255, .3);
+        background: rgba(255, 255, 255, 0.3);
         content: '';
       }
 

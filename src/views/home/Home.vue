@@ -1,10 +1,10 @@
 <template>
-  <div :class="['home', `tv-${lv}`]">
+  <div :class="['home', `tv-${activeTv}`]">
     <van-sticky>
       <Nav title="电磁力">
         <template #nav-right>
-          <VanIcon name="question-o"/>
-          <VanIcon name="share-o"/>
+          <VanIcon name="question-o" />
+          <VanIcon name="share-o" />
         </template>
       </Nav>
     </van-sticky>
@@ -12,24 +12,33 @@
       class="score-popover"
       v-show="showScoreTips"
     >
-      <van-icon name="volume-o"/>
-      電磁力較上周提高了{{ advanceScore }}分，冲冲冲！
+      <van-icon name="volume-o" /> 電磁力較上周提高了{{ advanceScore }}分，冲冲冲！
       <van-icon
         name="cross"
         @click="showScoreTips = !showScoreTips"
       />
-    </div>
-    <!--up主信息-->
-    <div class="up-info">
-      <img class="up-info-face" :src="getUserInfo.upFace" alt="up主" >
+  </div>
+  <!--up主信息-->
+  <div class="up-info">
+    <img
+      class="up-info-face"
+      :src="getUserInfo.upFace"
+      alt="up主"
+    >
       <span class="up-info-name">{{ getUserInfo.up }}</span>
-    </div>
-    <!-- vue-awesome-swiper轮播-->
-    <awesome-swiper ref="awesomeSwiper" :credit="getUserInfo.credit" :score="getUserInfo.score" :level="getUserInfo.level"/>
-    <div class="upgrade-time">更新时间：2022-07-05</div>
-    <!--权益-->
-    <privilege-grid :active-tv="activeTv"/>
-    <home-guidence/>
+  </div>
+  <!-- vue-awesome-swiper轮播-->
+  <awesome-swiper
+    ref="awesomeSwiper"
+    :credit="getUserInfo.credit"
+    :score="getUserInfo.score"
+    :level="getUserInfo.level"
+    v-if="flag"
+  />
+  <div class="upgrade-time">更新时间：2022-07-05</div>
+  <!--权益-->
+  <privilege-grid :active-tv="activeTv" />
+  <home-guidence/>
   </div>
 </template>
 
@@ -50,44 +59,42 @@ export default {
   },
   data() {
     return {
-      lv:1,
+      flag:false,
+      lv: 1,
       showplDialog: true,
-      activeTv: '1',
+      activeTv: 1,
       advanceScore: 34,
       showScoreTips: true,
       getUserInfo: {},
     }
   },
-  created(){
-    this.$nextTick(()=>{
+  created() {
+    this.$nextTick(() => {
       this.getUserData()
-      this.initUserData()
     })
   },
-  mounted() {
-
-  },
+  mounted() {},
   methods: {
     getUserData() {
       this.$axios
         .get('users.json')
         .then(res => {
-          const data =res.data
-          let user=null
-          for(let key in data){
-            if(data[key].UID==='233') {user=data[key]}
+          const data = res.data
+          let user = null
+          for (let key in data) {
+            if (data[key].UID === '233') {
+              user = data[key]
+            }
           }
-          this.getUserInfo=user
-          this.lv=this.getUserInfo.level
+          this.getUserInfo = user
+          this.$store.state.upLv = this.getUserInfo.level
+          this.$store.commit('InitUserInfo', this.getUserInfo)
+          this.activeTv=this.getUserInfo.level
+          this.flag=true
         })
         .catch(err => {
           console.log('error', err.message)
         })
-    },
-    initUserData(){
-      let curLevel=this.getUserInfo.level
-      console.log(this.getUserInfo.level);
-
     }
   }
 }
@@ -148,7 +155,6 @@ export default {
         display: none;
       }
     }
-
   }
 
   .upgrade-time {
