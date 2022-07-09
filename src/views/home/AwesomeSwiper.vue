@@ -95,9 +95,6 @@ export default {
           slideChange: function() {
             self.activeTv = this.realIndex
             self.$parent.activeTv = this.realIndex+1
-            console.log('self.activeTv', self.activeTv)
-            console.log( 'homeactiveTv',self.$parent.activeTv);
-
           }
         }
       },
@@ -257,23 +254,23 @@ export default {
       }
 
       &.lv-6 {
-        color: #f45f58;
-        background-image: linear-gradient(to right, #f8dfc6, #f9ae6c);
-
-        .van-progress {
-          .van-progress__portion {
-            background: #f45f58;
-          }
-        }
-      }
-
-      &.lv-7 {
         color: #9a2420;
         background-image: linear-gradient(to right, #fad7d3, #f99b91);
 
         .van-progress {
           .van-progress__portion {
             background: #9a2420;
+          }
+        }
+      }
+
+      &.lv-7 {
+        color: #f45f58;
+        background-image: linear-gradient(to right, #f8dfc6, #f9ae6c);
+
+        .van-progress {
+          .van-progress__portion {
+            background: #f45f58;
           }
         }
       }

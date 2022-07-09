@@ -11,7 +11,7 @@
       </div>
       <template v-if="curLv">
         <van-progress :percentage="score" track-color="rgba(0,0,0,.2)"/>
-        <div class="score">电磁力分：<b> {{ score }}/100</b></div>
+        <div class="score">电磁力分：<b>{{ score }}/100</b></div>
       </template>
       <div v-else style="font-size: 14px;">电磁力分达{{ borderLine }}可解锁</div>
     </div>
@@ -68,10 +68,11 @@ export default {
   }
 
   .score {
+    font-size: 12px;
     margin-top: 10px;
 
     b {
-      font-size: 20px;
+      font-size: 16px;
       font-family: DIN-BlackItalic;
     }
   }
